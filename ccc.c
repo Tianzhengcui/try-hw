@@ -23,6 +23,7 @@
 int lsh_cd(char **args);
 int lsh_help(char **args);
 int lsh_exit(char **args);
+int lsh_show(int argc, char **argv);
 
 /*
   List of builtin commands, followed by their corresponding functions.
@@ -84,6 +85,28 @@ int lsh_help(char **args)
   return 1;
 }
 
+int lsh_show(int argc, char **argv);
+{
+	FILE *fp; 
+	int c;
+	if(argv < 2){
+		printf("Usage:mycat file1 file2 ... \n");
+		return 0;
+	}
+	for(int i = 1; i < argc; i++){
+		fp = fopen(argv[i], "r");
+		if(fp == NULL){
+			printf("Error opening file %s. \n", argv[i]);
+			continue;
+		}	
+		
+		while((c = fget(fp)) != EOF){
+			putchar(c);	
+		}
+		fclose(fp);
+	}
+	return 0;
+}
 /**
    @brief Builtin command: exit.
    @param args List of args.  Not examined.
