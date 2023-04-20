@@ -31,13 +31,15 @@ int lsh_show(int argc, char **argv);
 char *builtin_str[] = {
   "cd",
   "help",
-  "exit"
+  "exit",
+	"show"
 };
 
 int (*builtin_func[]) (char **) = {
   &lsh_cd,
   &lsh_help,
-  &lsh_exit
+  &lsh_exit,
+	&lsh_show
 };
 
 int lsh_num_builtins() {
